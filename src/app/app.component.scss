@@ -1,0 +1,329 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:host {
+  --uphf-blue: hsl(192, 100%, 32%);
+  --uphf-blue-dark: hsl(192, 100%, 22%);
+  --uphf-yellow: #c8a14e;
+
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+  position: relative;
+  background-image: "";
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 700px;
+  margin: 0;
+  padding: 0;
+}
+
+#img-uphf {
+  max-height: 80vh;
+  max-width: 80vw;
+}
+
+.primary-color {
+  color: var(--uphf-blue);
+}
+
+.secondary-color {
+  color: var(--uphf-yellow);
+}
+
+.tertiary-color {
+  color: white;
+}
+
+#bot-button {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  background: var(--uphf-yellow);
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: var(--uphf-blue);
+  }
+}
+
+#chat-container {
+  display: flex;
+  position: fixed;
+  right: -100%;
+  // Center the chat container vertically
+  top: 1rem;
+  flex-direction: column;
+  width: calc(100% - 2rem);
+  max-width: 700px;
+  height: 80%;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  &.chat-open {
+    animation: slideIn 0.5s ease-in-out forwards;
+    -webkit-animation: slideIn 0.5s ease-in-out forwards;
+  }
+
+  &.chat-closed {
+    animation: slideOut 0.5s ease-in-out forwards;
+    -webkit-animation: slideOut 0.5s ease-in-out forwards;
+  }
+}
+
+// animation for the chat container from right to left
+@keyframes slideIn {
+  0% {
+    right: -100%;
+  }
+  100% {
+    right: 1rem;
+  }
+}
+
+@-webkit-keyframes slideIn {
+  0% {
+    right: -100%;
+  }
+  100% {
+    right: 1rem;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    right: 1rem;
+  }
+  100% {
+    right: -100%;
+  }
+}
+
+@-webkit-keyframes slideOut {
+  0% {
+    right: 1rem;
+  }
+  100% {
+    right: -100%;
+  }
+}
+
+#chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--uphf-blue);
+  padding: 1rem;
+  border-radius: 1rem 1rem 0 0;
+}
+
+#chat-header-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+}
+
+#close-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  border-radius: 9999px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: var(--uphf-blue-dark);
+  }
+}
+
+#chat-content {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: white;
+  border-radius: 0 0 1rem 1rem;
+  height: 100%;
+  overflow-y: auto;
+}
+
+#chat-messages {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  width: 100%;
+  gap: 1rem;
+  background: #fafafa;
+  background-image: radial-gradient(#eee 2px, transparent 0);
+  background-size: 30px 30px;
+  border-bottom: 3px solid var(--uphf-yellow);
+  overflow: auto;
+  // hide scrollbar
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  font-size: 0.9em;
+}
+
+#chat-message-ai {
+  display: flex;
+  padding: 0 1rem;
+  gap: 1rem;
+}
+
+.chat-message-user {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 1rem;
+  gap: 1rem;
+}
+
+.chat-message-user-content {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1rem;
+  background: var(--uphf-blue);
+  color: white;
+  border-radius: 1rem 1rem 0 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 70%;
+}
+
+#chat-message-ai-photo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+#chat-message-ai-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: white;
+  border: 3px solid var(--uphf-blue);
+  color: var(--uphf-blue);
+  border-radius: 9999px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#chat-message-ai-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  border-radius: 1rem 1rem 1rem 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 70%;
+}
+
+#chat-recommandation-container {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 2rem);
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0 1rem;
+  list-style-type: none;
+}
+
+#chat-recommandation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  padding: 1rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: #f0f0f0;
+  }
+}
+
+#chat-input {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+}
+
+#chat-input-box {
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 9999px;
+  font-size: 1rem;
+
+  &:hover {
+    background: #f0f0f0;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+#send-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  border-radius: 9999px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: #f0f0f0;
+  }
+}
