@@ -2,11 +2,7 @@
   <div class="content">
     <img id="img-uphf" src="assets/images/uphf.png" alt="UPHF" />
     <div id="bot-button" (click)="toggleChat()">
-      <mat-icon
-        aria-hidden="false"
-        aria-label="smart_toy"
-        fontIcon="smart_toy"
-      ></mat-icon>
+      <img src="assets/images/white_bot.png" width="40px" />
     </div>
 
     <div id="chat-container">
@@ -22,43 +18,60 @@
           ></mat-icon>
         </div>
       </div>
+      <div class="captcha-container"></div>
       <div id="chat-content">
         <div id="chat-messages">
-          <div id="chat-message-ai">
-            <div id="chat-message-ai-photo-container">
-              <div id="chat-message-ai-photo">
-                <mat-icon
-                  aria-hidden="false"
-                  aria-label="smart_toy"
-                  fontIcon="smart_toy"
-                ></mat-icon>
+          <div class="chat-message-ai">
+            <div class="chat-message-ai-photo-container">
+              <div class="chat-message-ai-photo">
+                <img src="assets/images/bot_png.png" width="40px" />
               </div>
             </div>
-            <p id="chat-message-ai-content">
+            <p class="chat-message-ai-content">
               Bonjour, je suis l'assistant virtuel de l'UPHF. Comment puis-je
               vous aider ?
             </p>
           </div>
-          <ul id="chat-recommandation-container">
-            <li id="chat-recommandation">Combien coûte l'inscription ?</li>
-            <li id="chat-recommandation">
-              Quelles sont les formations proposées ?
-            </li>
-            <li id="chat-recommandation">
-              Quelles sont les coordonnées du centre médical ?
-            </li>
-          </ul>
+          <div id="chat-recommandation-container">
+            <p id="chat-recommandation-title">
+              Exemples de questions à poser :
+            </p>
+            <ul id="chat-recommandation-list">
+              <li
+                id="chat-recommandation"
+                (click)="sendMessage('Combien coûte l\'inscription ?')"
+              >
+                Combien coûte l'inscription à l'université ?
+              </li>
+              <li
+                id="chat-recommandation"
+                (click)="sendMessage('Quelles sont les formations proposées ?')"
+              >
+                Quelles sont les formations proposées ?
+              </li>
+              <li
+                id="chat-recommandation"
+                (click)="
+                  sendMessage(
+                    'Quelles sont les coordonnées du centre médical ?'
+                  )
+                "
+              >
+                Quelles sont les coordonnées du centre médical ?
+              </li>
+            </ul>
+          </div>
         </div>
         <div id="chat-input">
           <input
             id="chat-input-box"
             type="text"
             placeholder="Posez une question..."
-            (keyup.enter)="sendMessage()"
+            (keyup.enter)="sendMessageInput()"
             autocomplete="off"
           />
 
-          <div id="send-button" (click)="sendMessage()">
+          <div id="send-button" (click)="sendMessageInput()">
             <mat-icon
               aria-hidden="false"
               aria-label="send"
