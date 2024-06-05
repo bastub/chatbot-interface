@@ -1,13 +1,18 @@
 <main class="main">
   <div class="content">
-    <img id="img-uphf" src="assets/images/uphf.png" alt="UPHF" />
+    <img
+      id="img-saclay"
+      src="assets/images/saclay.png"
+      alt="Logo Paris Saclay"
+    />
+
     <div id="bot-button" (click)="toggleChat()">
       <img src="assets/images/white_bot.png" width="40px" />
     </div>
 
     <div id="chat-container">
       <div id="chat-header">
-        <div id="chat-header-text">UPHF AI Chatbot</div>
+        <div id="chat-header-text">Saclay AI Chatbot</div>
         <div id="close-button" (click)="toggleChat()">
           <mat-icon
             class="tertiary-color"
@@ -18,7 +23,6 @@
           ></mat-icon>
         </div>
       </div>
-      <div class="captcha-container"></div>
       <div id="chat-content">
         <div id="chat-messages">
           <div class="chat-message-ai">
@@ -28,11 +32,11 @@
               </div>
             </div>
             <p class="chat-message-ai-content">
-              Bonjour, je suis l'assistant virtuel de l'UPHF. Comment puis-je
-              vous aider ?
+              Bonjour, je suis l'assistant virtuel de l'université de Paris
+              Saclay. Comment puis-je vous aider ?
             </p>
           </div>
-          <div id="chat-recommandation-container">
+          <div *ngIf="isHuman" id="chat-recommandation-container">
             <p id="chat-recommandation-title">
               Exemples de questions à poser :
             </p>
@@ -63,7 +67,14 @@
           </div>
         </div>
         <div id="chat-input">
+          <div *ngIf="!isHuman" id="captcha-container">
+            <re-captcha
+              (resolved)="captchaResolved()"
+              siteKey="6Le2bPEpAAAAAHPcxfEB4eIesajSXuRlZ6xTFqOU"
+            ></re-captcha>
+          </div>
           <input
+            *ngIf="isHuman"
             id="chat-input-box"
             type="text"
             placeholder="Posez une question..."
@@ -71,7 +82,7 @@
             autocomplete="off"
           />
 
-          <div id="send-button" (click)="sendMessageInput()">
+          <div *ngIf="isHuman" id="send-button" (click)="sendMessageInput()">
             <mat-icon
               aria-hidden="false"
               aria-label="send"

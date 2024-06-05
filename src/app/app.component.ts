@@ -1,16 +1,19 @@
 import { Renderer2, ElementRef, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { RecaptchaModule } from 'ng-recaptcha';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatIconModule],
+  imports: [RouterOutlet, MatIconModule, RecaptchaModule, NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'chatbot-interface';
+  isHuman = false;
 
   toggleChat() {
     const chat = document.getElementById('chat-container');
@@ -24,6 +27,11 @@ export class AppComponent {
         chat.classList.toggle('chat-closed');
       }
     }
+  }
+
+  captchaResolved() {
+    console.log('captcha resolved');
+    this.isHuman = true;
   }
 
   constructor(private renderer: Renderer2, private el: ElementRef) {}
@@ -58,7 +66,7 @@ export class AppComponent {
     }
 
     // randomly pick a number between 0 and 5
-    const random = Math.floor(Math.random() * 6);
+    const random = Math.floor(Math.random() * 5);
     let botMessage = '';
     if (random === 0) {
       botMessage = "Cherche sur Google stp j'existe pas encore";
@@ -70,8 +78,6 @@ export class AppComponent {
       botMessage = 'Aucune idée, question suivante';
     } else if (random === 4) {
       botMessage = "Lalala j'écoute pas";
-    } else if (random === 5) {
-      botMessage = message + ' CHIPS HAHAHAHAAA';
     }
 
     this.aiMessage(botMessage);

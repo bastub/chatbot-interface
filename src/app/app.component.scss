@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :host {
-  --uphf-blue: hsl(192, 100%, 32%);
-  --uphf-blue-dark: hsl(192, 100%, 22%);
-  --uphf-yellow: #c8a14e;
+  --primary-color: hsl(323, 100%, 20%);
+  --primary-color-dark: hsl(323, 100%, 10%);
+  --secondary-color: hsl(284, 21%, 17%);
 
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
@@ -35,17 +35,17 @@ main {
   padding: 0;
 }
 
-#img-uphf {
+#img-saclay {
   max-height: 80vh;
   max-width: 80vw;
 }
 
 .primary-color {
-  color: var(--uphf-blue);
+  color: var(--primary-color);
 }
 
 .secondary-color {
-  color: var(--uphf-yellow);
+  color: var(--secondary-color);
 }
 
 .tertiary-color {
@@ -61,7 +61,7 @@ main {
   align-items: center;
   height: 30px;
   width: 30px;
-  background: var(--uphf-yellow);
+  background: var(--primary-color);
   color: white;
   border: none;
   border-radius: 9999px;
@@ -72,7 +72,7 @@ main {
   transition: background 0.2s;
 
   &:hover {
-    background: var(--uphf-blue);
+    background: var(--secondary-color);
   }
 }
 
@@ -142,7 +142,7 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--uphf-blue);
+  background: var(--primary-color);
   padding: 1rem;
   border-radius: 1rem 1rem 0 0;
 }
@@ -166,7 +166,7 @@ main {
   transition: background 0.2s;
 
   &:hover {
-    background: var(--uphf-blue-dark);
+    background: var(--primary-color-dark);
   }
 }
 
@@ -188,7 +188,7 @@ main {
   background: #f8f8f8;
   background-image: radial-gradient(#eee 2px, transparent 0);
   background-size: 30px 30px;
-  border-bottom: 3px solid var(--uphf-yellow);
+  border-bottom: 3px solid var(--secondary-color);
   overflow: auto;
   // scrollbar-width: none;
   // &::-webkit-scrollbar {
@@ -211,7 +211,7 @@ main {
   justify-content: flex-end;
   align-items: center;
   padding: 1rem;
-  background: var(--uphf-blue);
+  background: var(--primary-color);
   color: white;
   border-radius: 1rem 1rem 0 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -234,8 +234,8 @@ main {
   width: 40px;
   height: 40px;
   background: white;
-  border: 3px solid var(--uphf-blue);
-  color: var(--uphf-blue);
+  border: 3px solid var(--primary-color);
+  color: var(--primary-color);
   border-radius: 9999px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -299,17 +299,25 @@ main {
   width: calc(100% - 2rem);
   padding: 1rem;
   background: white;
-  border: 2px solid var(--uphf-yellow);
+  border: 2px solid var(--secondary-color);
   border-radius: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: scale 0.2s, border-color 0.2s, box-shadow 0.2s;
 
   &:hover {
-    border-color: var(--uphf-blue);
+    border-color: var(--primary-color);
     scale: 1.05;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
+}
+
+#captcha-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 #chat-input {
@@ -351,6 +359,7 @@ main {
   font-size: 1.5rem;
   cursor: pointer;
   transition: background 0.2s;
+  color: var(--secondary-color);
 
   &:hover {
     background: #f0f0f0;
@@ -371,11 +380,15 @@ main {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--uphf-blue);
+  background: var(--primary-color);
   border-radius: 9999px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--uphf-blue-dark);
+  background: var(--primary-color-dark);
+}
+
+.hidden {
+  display: none;
 }
