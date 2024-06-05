@@ -4,16 +4,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { NgIf } from '@angular/common';
 
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatIconModule, RecaptchaModule, NgIf],
+  imports: [RouterOutlet, MatIconModule, RecaptchaModule, NgIf, MatSlideToggle],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'chatbot-interface';
   isHuman = false;
+  showSettings = false;
 
   toggleChat() {
     const chat = document.getElementById('chat-container');
@@ -26,6 +29,18 @@ export class AppComponent {
       if (nb > 0) {
         chat.classList.toggle('chat-closed');
       }
+      this.showSettings = false;
+    }
+  }
+
+  toggleSettings() {
+    this.showSettings = !this.showSettings;
+  }
+
+  toggleBlueFilter() {
+    const main = document.getElementById('main');
+    if (main) {
+      main.classList.toggle('blue-filter');
     }
   }
 
@@ -56,6 +71,7 @@ export class AppComponent {
     if (chat) {
       const newMessage_container = this.renderer.createElement('div');
       const newMessage_content = this.renderer.createElement('p');
+      this.renderer.addClass(newMessage_container, 'chat-message');
       this.renderer.addClass(newMessage_container, 'chat-message-user');
       this.renderer.addClass(newMessage_content, 'chat-message-user-content');
       const newMessage_text = this.renderer.createText(message);
@@ -92,6 +108,7 @@ export class AppComponent {
       const ai_photo_container = this.renderer.createElement('div');
       const ai_photo = this.renderer.createElement('div');
       const ai_photo_icon = this.renderer.createElement('img');
+      this.renderer.addClass(newMessage_container, 'chat-message');
       this.renderer.addClass(newMessage_container, 'chat-message-ai');
       this.renderer.addClass(newMessage_content, 'chat-message-ai-content');
       this.renderer.addClass(
@@ -114,6 +131,13 @@ export class AppComponent {
       this.renderer.appendChild(newMessage_container, newMessage_content);
       this.renderer.appendChild(chat, newMessage_container);
       chat.scrollTop = chat.scrollHeight;
+    }
+  }
+
+  clearChat() {
+    const messages = document.getElementsByClassName('chat-message');
+    while (messages.length > 0) {
+      messages[0].remove();
     }
   }
 }

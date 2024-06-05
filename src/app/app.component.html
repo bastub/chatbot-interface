@@ -1,26 +1,88 @@
-<main class="main">
+<main class="main" id="main">
   <div class="content">
     <img
       id="img-saclay"
       src="assets/images/saclay.png"
-      alt="Logo Paris Saclay"
+      alt="Logo Universite Evry Paris-Saclay"
     />
 
     <div id="bot-button" (click)="toggleChat()">
       <img src="assets/images/white_bot.png" width="40px" />
     </div>
 
+    <div *ngIf="showSettings" id="settings-background">
+      <div id="settings-container">
+        <div id="settings-header">
+          <h2>Paramètres</h2>
+          <div
+            class="mat-button small-button"
+            id="close-button"
+            (click)="toggleSettings()"
+          >
+            <mat-icon
+              class="tertiary-color"
+              id="close-icon"
+              aria-hidden="false"
+              aria-label="close"
+              fontIcon="close"
+            ></mat-icon>
+          </div>
+        </div>
+        <div id="settings-content">
+          <div class="settings-element-container" id="settings-theme">
+            <h3>Filtre lumières bleues</h3>
+            <div class="buttons-container" id="settings-theme-buttons">
+              <!-- (click)="setTheme('light')" -->
+              <mat-slide-toggle color="primary" (change)="toggleBlueFilter()">
+                <span class="mat-slide-toggle-content">
+                  <span class="mat-slide-toggle-thumb"></span>
+                  <span class="mat-slide-toggle-bar"></span>
+                </span>
+              </mat-slide-toggle>
+            </div>
+          </div>
+          <div class="settings-element-container" id="settings-delete">
+            <h3>Effacer la discussion</h3>
+            <div class="mat-button" id="delete-button" (click)="clearChat()">
+              <mat-icon
+                class="tertiary-color"
+                id="delete-icon"
+                aria-hidden="false"
+                aria-label="delete"
+                fontIcon="delete"
+              ></mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="chat-container">
       <div id="chat-header">
-        <div id="chat-header-text"><h1>Saclay AI Chatbot</h1></div>
-        <div id="close-button" (click)="toggleChat()">
-          <mat-icon
-            class="tertiary-color"
-            id="close-icon"
-            aria-hidden="false"
-            aria-label="close"
-            fontIcon="close"
-          ></mat-icon>
+        <div id="chat-header-text"><h1>Sacl-AI Discussion</h1></div>
+        <div class="buttons-container" id="chat-button-container">
+          <div
+            class="mat-button"
+            id="settings-button"
+            (click)="toggleSettings()"
+          >
+            <mat-icon
+              class="tertiary-color"
+              id="settings-icon"
+              aria-hidden="false"
+              aria-label="settings"
+              fontIcon="settings"
+            ></mat-icon>
+          </div>
+          <div class="mat-button" id="close-button" (click)="toggleChat()">
+            <mat-icon
+              class="tertiary-color"
+              id="close-icon"
+              aria-hidden="false"
+              aria-label="close"
+              fontIcon="close"
+            ></mat-icon>
+          </div>
         </div>
       </div>
       <div id="chat-content">
@@ -28,7 +90,11 @@
           <div class="chat-message-ai">
             <div class="chat-message-ai-photo-container">
               <div class="chat-message-ai-photo">
-                <img src="assets/images/bot_png.png" width="40px" />
+                <img
+                  src="assets/images/bot_png.png"
+                  width="40px"
+                  alt="Illustration de robot"
+                />
               </div>
             </div>
             <p class="chat-message-ai-content">
