@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :host {
-  --primary-color: hsl(323, 100%, 20%);
-  --primary-color-dark: hsl(323, 100%, 10%);
-  --secondary-color: hsl(284, 21%, 17%);
+  --primary-color: hsl(205, 100%, 28%);
+  --primary-color-dark: hsl(205, 100%, 15%);
+  --secondary-color: hsl(28, 84%, 53%);
 
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
@@ -35,6 +35,17 @@ main {
   padding: 0;
 }
 
+h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+
+  @media (min-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
 #img-saclay {
   max-height: 80vh;
   max-width: 80vw;
@@ -61,7 +72,7 @@ main {
   align-items: center;
   height: 30px;
   width: 30px;
-  background: var(--primary-color);
+  background: var(--secondary-color);
   color: white;
   border: none;
   border-radius: 9999px;
@@ -72,7 +83,7 @@ main {
   transition: background 0.2s;
 
   &:hover {
-    background: var(--secondary-color);
+    background: var(--primary-color);
   }
 }
 

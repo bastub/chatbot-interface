@@ -105,6 +105,7 @@ export class AppComponent {
         'assets/images/bot_png.png'
       );
       this.renderer.setAttribute(ai_photo_icon, 'width', '40px');
+      this.renderer.setAttribute(ai_photo_icon, 'alt', 'Illustration de robot');
       this.renderer.appendChild(ai_photo, ai_photo_icon);
       this.renderer.appendChild(ai_photo_container, ai_photo);
       this.renderer.appendChild(newMessage_container, ai_photo_container);
