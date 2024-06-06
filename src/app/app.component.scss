@@ -474,9 +474,8 @@ h3 {
 
 .chat-message-user-content,
 .chat-message-ai-content {
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  word-break: break-all;
+  overflow-wrap: anywhere;
+  word-break: keep-all;
   hyphens: auto;
 }
 
