@@ -104,13 +104,17 @@ export class AppComponent {
     if (chat) {
       const newMessage_container_1 = this.renderer.createElement('div');
       const newMessage_container_2 = this.renderer.createElement('div');
+      const newMessage_container_3 = this.renderer.createElement('div');
       const newMessage_content = this.renderer.createElement('p');
       const ai_photo_container = this.renderer.createElement('div');
       const ai_photo = this.renderer.createElement('div');
       const ai_photo_icon = this.renderer.createElement('img');
+      const ai_copy = this.renderer.createElement('span');
+      const ai_regenerate = this.renderer.createElement('span');
       const ai_thumbs = this.renderer.createElement('div');
       const ai_thumb_up = this.renderer.createElement('span');
       const ai_thumb_down = this.renderer.createElement('span');
+
       this.renderer.addClass(newMessage_container_1, 'chat-message');
       this.renderer.addClass(
         newMessage_container_1,
@@ -120,6 +124,10 @@ export class AppComponent {
       this.renderer.addClass(
         newMessage_container_2,
         'chat-message-ai-content-container'
+      );
+      this.renderer.addClass(
+        newMessage_container_3,
+        'chat-message-ai-big-content-container'
       );
       this.renderer.addClass(newMessage_content, 'chat-message-ai-content');
       this.renderer.addClass(
@@ -138,16 +146,25 @@ export class AppComponent {
       if (this.isFeedback) {
         this.renderer.addClass(ai_thumbs, 'visible');
       }
+      this.renderer.addClass(ai_copy, 'material-symbols-outlined');
+      this.renderer.addClass(ai_copy, 'chat-message-ai-copy');
+      this.renderer.addClass(ai_regenerate, 'material-symbols-outlined');
+      this.renderer.addClass(ai_regenerate, 'chat-message-ai-regenerate');
       this.renderer.addClass(ai_thumb_up, 'material-symbols-outlined');
-      // this.renderer.addClass(ai_thumb_up, 'chat-message-ai-thumb');
       this.renderer.addClass(ai_thumb_up, 'chat-message-ai-thumb-up');
       this.renderer.addClass(ai_thumb_down, 'material-symbols-outlined');
-      // this.renderer.addClass(ai_thumb_up, 'chat-message-ai-thumb');
       this.renderer.addClass(ai_thumb_down, 'chat-message-ai-thumb-down');
+
+      ai_copy.innerHTML = 'content_copy';
+      ai_regenerate.innerHTML = 'autorenew';
       ai_thumb_up.innerHTML = 'thumb_up';
       ai_thumb_down.innerHTML = 'thumb_down';
 
       // Ajoute des écouteurs d'événements
+      this.renderer.listen(ai_copy, 'click', (event) => {
+        const text = newMessage_content.innerText;
+        navigator.clipboard.writeText(text);
+      });
       this.renderer.listen(ai_thumb_up, 'click', (event) =>
         this.thumbUp(event.target)
       );
@@ -162,7 +179,12 @@ export class AppComponent {
       this.renderer.appendChild(newMessage_container_1, ai_photo_container);
       const newMessage_text = this.renderer.createText(message);
       this.renderer.appendChild(newMessage_content, newMessage_text);
-      this.renderer.appendChild(newMessage_container_2, newMessage_content);
+      this.renderer.appendChild(newMessage_content, ai_copy);
+      this.renderer.appendChild(newMessage_content, ai_regenerate);
+      this.renderer.appendChild(newMessage_container_3, newMessage_content);
+      this.renderer.appendChild(newMessage_container_3, ai_copy);
+      this.renderer.appendChild(newMessage_container_3, ai_regenerate);
+      this.renderer.appendChild(newMessage_container_2, newMessage_container_3);
       this.renderer.appendChild(newMessage_container_2, ai_thumbs);
       this.renderer.appendChild(newMessage_container_1, newMessage_container_2);
 
