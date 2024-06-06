@@ -33,7 +33,11 @@
             <h3>Filtre lumières bleues</h3>
             <div class="buttons-container" id="settings-theme-buttons">
               <!-- (click)="setTheme('light')" -->
-              <mat-slide-toggle color="primary" (change)="toggleBlueFilter()">
+              <mat-slide-toggle
+                [checked]="isBlueFilter"
+                (change)="toggleBlueFilter()"
+                color="primary"
+              >
                 <span class="mat-slide-toggle-content">
                   <span class="mat-slide-toggle-thumb"></span>
                   <span class="mat-slide-toggle-bar"></span>
@@ -160,5 +164,7 @@
     </div>
   </div>
 </main>
+
+<div *ngIf="isBlueFilter" class="blue-filter"></div>
 
 <router-outlet />

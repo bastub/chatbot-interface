@@ -17,6 +17,7 @@ export class AppComponent {
   title = 'chatbot-interface';
   isHuman = false;
   showSettings = false;
+  isBlueFilter = false;
 
   toggleChat() {
     const chat = document.getElementById('chat-container');
@@ -38,10 +39,7 @@ export class AppComponent {
   }
 
   toggleBlueFilter() {
-    const main = document.getElementById('main');
-    if (main) {
-      main.classList.toggle('blue-filter');
-    }
+    this.isBlueFilter = !this.isBlueFilter;
   }
 
   captchaResolved() {
