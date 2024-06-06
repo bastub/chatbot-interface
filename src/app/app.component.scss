@@ -13,6 +13,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.material-symbols-filled {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
 main {
   width: 100%;
   min-height: 100%;
@@ -46,6 +54,12 @@ main {
   max-width: 700px;
   margin: 0;
   padding: 0;
+}
+
+iframe {
+  width: 100vw;
+  height: 100vh;
+  border: none;
 }
 
 h1 {
@@ -106,8 +120,8 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   background: var(--secondary-color);
   color: white;
   border: none;
@@ -205,6 +219,7 @@ h3 {
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
+  margin-right: 0.5rem;
 
   @media screen and (min-width: 768px) {
     gap: 1rem;
@@ -310,6 +325,53 @@ h3 {
   }
 }
 
+.settings-buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  color: var(--primary-color);
+  width: 50px;
+  @media screen and (min-width: 768px) {
+    gap: 1rem;
+  }
+}
+
+.settings-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  font-style: italic;
+  color: #888;
+
+  a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}
+
+#delete-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-color);
+  transition: color;
+
+  &:hover {
+    color: red;
+    cursor: pointer;
+  }
+}
+
 #chat-content {
   display: flex;
   flex-direction: column;
@@ -330,11 +392,6 @@ h3 {
   background-size: 30px 30px;
   border-bottom: 3px solid var(--secondary-color);
   overflow: auto;
-  // scrollbar-width: none;
-  // &::-webkit-scrollbar {
-  //   display: none;
-  // }
-
   font-size: 0.9em;
   padding-top: 1rem;
 }
@@ -364,7 +421,10 @@ h3 {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-bottom: 1rem;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Standard syntax */
 }
 
 .chat-message-ai-photo {
@@ -384,6 +444,14 @@ h3 {
   display: flex;
   padding: 0 1rem;
   gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.chat-message-ai-content-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+  gap: 0.5rem;
 }
 
 .chat-message-ai-content {
@@ -394,9 +462,40 @@ h3 {
   background: white;
   border-radius: 1rem 1rem 1rem 0;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 70%;
   margin: 0;
-  margin-bottom: 1rem;
+}
+
+.chat-message-ai-thumbs {
+  display: none;
+  justify-content: right;
+  align-items: center;
+  gap: 1rem;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Standard syntax */
+
+  &.visible {
+    display: flex;
+  }
+}
+
+.chat-message-ai-thumb-up,
+.chat-message-ai-thumb-down {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s;
+}
+
+.chat-message-ai-thumb-up-clicked,
+.chat-message-ai-thumb-up:hover {
+  color: green;
+}
+
+.chat-message-ai-thumb-down-clicked,
+.chat-message-ai-thumb-down:hover {
+  color: red;
 }
 
 #chat-recommandation-container {

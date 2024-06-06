@@ -1,10 +1,16 @@
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0"
+/>
+
 <main class="main" id="main">
   <div class="content">
-    <img
+    <!-- <img
       id="img-saclay"
       src="assets/images/saclay.png"
       alt="Logo Universite Evry Paris-Saclay"
-    />
+    /> -->
+    <iframe src="https://www.univ-evry.fr/accueil.html"></iframe>
 
     <div id="bot-button" (click)="toggleChat()">
       <img src="assets/images/white_bot.png" width="40px" />
@@ -31,8 +37,7 @@
         <div id="settings-content">
           <div class="settings-element-container" id="settings-theme">
             <h3>Filtre lumières bleues</h3>
-            <div class="buttons-container" id="settings-theme-buttons">
-              <!-- (click)="setTheme('light')" -->
+            <div class="settings-buttons-container" id="settings-buttons">
               <mat-slide-toggle
                 [checked]="isBlueFilter"
                 (change)="toggleBlueFilter()"
@@ -47,15 +52,38 @@
           </div>
           <div class="settings-element-container" id="settings-delete">
             <h3>Effacer la discussion</h3>
-            <div class="mat-button" id="delete-button" (click)="clearChat()">
-              <mat-icon
-                class="tertiary-color"
-                id="delete-icon"
-                aria-hidden="false"
-                aria-label="delete"
-                fontIcon="delete"
-              ></mat-icon>
+            <div class="settings-buttons-container" id="settings-buttons">
+              <div id="delete-button" (click)="clearChat()">
+                <mat-icon
+                  id="delete-icon"
+                  aria-hidden="false"
+                  aria-label="delete"
+                  fontIcon="delete"
+                ></mat-icon>
+              </div>
             </div>
+          </div>
+          <div class="settings-element-container" id="settings-feedback">
+            <h3>Feedback</h3>
+            <div class="settings-buttons-container" id="settings-buttons">
+              <mat-slide-toggle
+                [checked]="isFeedback"
+                (change)="toggleFeedback()"
+                color="primary"
+              >
+                <span class="mat-slide-toggle-content">
+                  <span class="mat-slide-toggle-thumb"></span>
+                  <span class="mat-slide-toggle-bar"></span>
+                </span>
+              </mat-slide-toggle>
+            </div>
+          </div>
+          <div class="settings-footer">
+            <p>
+              <a href="https://github.com/bastub/chatbot-interface"
+                >Sacl-AI interface v0.3</a
+              >
+            </p>
           </div>
         </div>
       </div>
