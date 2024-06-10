@@ -15,7 +15,7 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 })
 export class AppComponent {
   title = 'chatbot-interface';
-  isHuman = true;
+  isHuman = false;
   showSettings = false;
   isBlueFilter = false;
   isFeedback = false;
