@@ -1,17 +1,20 @@
 import { Renderer2, ElementRef, Component } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { NgIf } from '@angular/common';
-
 import { MatSlideToggle } from '@angular/material/slide-toggle';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatIconModule, RecaptchaModule, NgIf, MatSlideToggle],
+  imports: [HttpClientModule, RouterOutlet, MatIconModule, RecaptchaModule, NgIf, MatSlideToggle],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'chatbot-interface';
@@ -19,6 +22,9 @@ export class AppComponent {
   showSettings = false;
   isBlueFilter = false;
   isFeedback = false;
+
+
+  constructor(private renderer: Renderer2, private el: ElementRef, private http: HttpClient) {} 
 
   toggleChat() {
     const chat = document.getElementById('chat-container');
@@ -48,7 +54,6 @@ export class AppComponent {
     this.isHuman = true;
   }
 
-  constructor(private renderer: Renderer2, private el: ElementRef) {}
 
   sendMessageInput() {
     const message = document.getElementById(
@@ -66,11 +71,9 @@ export class AppComponent {
 
   sendMessage(message: string) {
     const chat = document.getElementById('chat-messages');
-
     if (chat) {
       const newMessage_container = this.renderer.createElement('div');
       const newMessage_content = this.renderer.createElement('p');
-      this.renderer.addClass(newMessage_container, 'chat-message');
       this.renderer.addClass(newMessage_container, 'chat-message-user');
       this.renderer.addClass(newMessage_content, 'chat-message-user-content');
       const newMessage_text = this.renderer.createText(message);
@@ -80,22 +83,20 @@ export class AppComponent {
       chat.scrollTop = chat.scrollHeight;
     }
 
-    // randomly pick a number between 0 and 5
-    const random = Math.floor(Math.random() * 5);
-    let botMessage = '';
-    if (random === 0) {
-      botMessage = "Cherche sur Google stp j'existe pas encore";
-    } else if (random === 1) {
-      botMessage = 'Au pif je dirais 12';
-    } else if (random === 2) {
-      botMessage = 'Parle moi sur un autre ton.';
-    } else if (random === 3) {
-      botMessage = 'Aucune idée, question suivante';
-    } else if (random === 4) {
-      botMessage = "Lalala j'écoute pas";
-    }
+    this.sendToAI(message); // Envoyer le message à l'IA
+  }
 
-    this.aiMessage(botMessage);
+  sendToAI(message: string) {
+    this.http.post<{ answer: string }>('http://127.0.0.1:8000/ask', { question: message })
+      .pipe(
+        catchError(error => {
+          console.error('Error:', error);
+          return of({ answer: 'Sorry, there was an error processing your request.' });
+        })
+      )
+      .subscribe(response => {
+        this.aiMessage(response.answer);
+      });
   }
 
   aiMessage(message: string) {
