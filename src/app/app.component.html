@@ -1,0 +1,211 @@
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0"
+/>
+
+<main class="main" id="main">
+  <div class="content">
+    <!-- <img
+      id="img-saclay"
+      src="assets/images/saclay.png"
+      alt="Logo Universite Evry Paris-Saclay"
+    /> -->
+    <iframe src="https://www.univ-evry.fr/accueil.html"></iframe>
+
+    <div id="bot-button" (click)="toggleChat()">
+      <img src="assets/images/white_bot.png" width="40px" />
+    </div>
+
+    <div *ngIf="showSettings" id="settings-background">
+      <div id="settings-container">
+        <div id="settings-header">
+          <h2>Paramètres</h2>
+          <div
+            class="mat-button small-button"
+            id="close-button"
+            (click)="toggleSettings()"
+          >
+            <mat-icon
+              class="tertiary-color"
+              id="close-icon"
+              aria-hidden="false"
+              aria-label="close"
+              fontIcon="close"
+            ></mat-icon>
+          </div>
+        </div>
+        <div id="settings-content">
+          <div class="settings-element-container" id="settings-theme">
+            <h3>Filtre lumières bleues</h3>
+            <div class="settings-buttons-container" id="settings-buttons">
+              <mat-slide-toggle
+                [checked]="isBlueFilter"
+                (change)="toggleBlueFilter()"
+                color="primary"
+              >
+                <span class="mat-slide-toggle-content">
+                  <span class="mat-slide-toggle-thumb"></span>
+                  <span class="mat-slide-toggle-bar"></span>
+                </span>
+              </mat-slide-toggle>
+            </div>
+          </div>
+          <div class="settings-element-container" id="settings-delete">
+            <h3>Effacer la discussion</h3>
+            <div class="settings-buttons-container" id="settings-buttons">
+              <div id="delete-button" (click)="clearChat()">
+                <mat-icon
+                  id="delete-icon"
+                  aria-hidden="false"
+                  aria-label="delete"
+                  fontIcon="delete"
+                ></mat-icon>
+              </div>
+            </div>
+          </div>
+          <div class="settings-element-container" id="settings-feedback">
+            <h3>Feedback</h3>
+            <div class="settings-buttons-container" id="settings-buttons">
+              <mat-slide-toggle
+                [checked]="isFeedback"
+                (change)="toggleFeedback()"
+                color="primary"
+              >
+                <span class="mat-slide-toggle-content">
+                  <span class="mat-slide-toggle-thumb"></span>
+                  <span class="mat-slide-toggle-bar"></span>
+                </span>
+              </mat-slide-toggle>
+            </div>
+          </div>
+          <div class="settings-element-container" id="settings-privacy">
+            <h3>
+              <a href="https://www.univ-evry.fr/mentions-legales.html"
+                >Mentions légales</a
+              >
+            </h3>
+          </div>
+          <div class="settings-footer">
+            <p>
+              <a href="https://github.com/bastub/chatbot-interface"
+                >Sacl-AI interface v0.3</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="chat-container">
+      <div id="chat-header">
+        <div id="chat-header-text"><h1>Sacl-AI Discussion</h1></div>
+        <div class="buttons-container" id="chat-button-container">
+          <div
+            class="mat-button"
+            id="settings-button"
+            (click)="toggleSettings()"
+          >
+            <mat-icon
+              class="tertiary-color"
+              id="settings-icon"
+              aria-hidden="false"
+              aria-label="settings"
+              fontIcon="settings"
+            ></mat-icon>
+          </div>
+          <div class="mat-button" id="close-button" (click)="toggleChat()">
+            <mat-icon
+              class="tertiary-color"
+              id="close-icon"
+              aria-hidden="false"
+              aria-label="close"
+              fontIcon="close"
+            ></mat-icon>
+          </div>
+        </div>
+      </div>
+      <div id="chat-content">
+        <div id="chat-messages">
+          <div class="chat-message-ai">
+            <div class="chat-message-ai-photo-container">
+              <div class="chat-message-ai-photo">
+                <img
+                  src="assets/images/bot_png.png"
+                  width="40px"
+                  alt="Illustration de robot"
+                />
+              </div>
+            </div>
+            <p class="chat-message-ai-content">
+              Bonjour, je suis l'assistant virtuel de l'université de Paris
+              Saclay. Comment puis-je vous aider ?
+            </p>
+          </div>
+          <div *ngIf="isHuman" id="chat-recommandation-container">
+            <p id="chat-recommandation-title">
+              Exemples de questions à poser :
+            </p>
+            <ul id="chat-recommandation-list">
+              <li
+                id="chat-recommandation"
+                (click)="sendMessage('Combien coûte l\'inscription ?')"
+              >
+                Combien coûte l'inscription à l'université ?
+              </li>
+              <li
+                id="chat-recommandation"
+                (click)="sendMessage('Quelles sont les formations proposées ?')"
+              >
+                Quelles sont les formations proposées ?
+              </li>
+              <li
+                id="chat-recommandation"
+                (click)="
+                  sendMessage(
+                    'Quelles sont les coordonnées du centre médical ?'
+                  )
+                "
+              >
+                Quelles sont les coordonnées du centre médical ?
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="chat-input">
+          <div *ngIf="!isHuman" id="captcha-container">
+            <re-captcha
+              (resolved)="captchaResolved()"
+              siteKey="6Le2bPEpAAAAAHPcxfEB4eIesajSXuRlZ6xTFqOU"
+            ></re-captcha>
+          </div>
+          <input
+            *ngIf="isHuman"
+            id="chat-input-box"
+            type="text"
+            placeholder="Posez une question..."
+            (keyup.enter)="sendMessageInput()"
+            autocomplete="off"
+          />
+
+          <div *ngIf="isHuman" id="send-button" (click)="sendMessageInput()">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="send"
+              fontIcon="send"
+            ></mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="privacy-policy-container">
+      <a href="https://www.univ-evry.fr/politique-de-confidentialite.html"
+        >Politique de confidentialité</a
+      >
+    </div>
+  </div>
+</main>
+
+<div *ngIf="isBlueFilter" class="blue-filter"></div>
+
+<router-outlet />
