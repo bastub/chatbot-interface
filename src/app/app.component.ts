@@ -8,11 +8,17 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { NgIf } from '@angular/common';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HttpClientModule, RouterOutlet, MatIconModule, RecaptchaModule, NgIf, MatSlideToggle],
+  imports: [
+    HttpClientModule,
+    RouterOutlet,
+    MatIconModule,
+    RecaptchaModule,
+    NgIf,
+    MatSlideToggle,
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
@@ -23,8 +29,11 @@ export class AppComponent {
   isBlueFilter = false;
   isFeedback = false;
 
-
-  constructor(private renderer: Renderer2, private el: ElementRef, private http: HttpClient) {} 
+  constructor(
+    private renderer: Renderer2,
+    private el: ElementRef,
+    private http: HttpClient
+  ) {}
 
   toggleChat() {
     const chat = document.getElementById('chat-container');
@@ -54,7 +63,6 @@ export class AppComponent {
     this.isHuman = true;
   }
 
-
   sendMessageInput() {
     const message = document.getElementById(
       'chat-input-box'
@@ -74,6 +82,7 @@ export class AppComponent {
     if (chat) {
       const newMessage_container = this.renderer.createElement('div');
       const newMessage_content = this.renderer.createElement('p');
+      this.renderer.addClass(newMessage_container, 'chat-message');
       this.renderer.addClass(newMessage_container, 'chat-message-user');
       this.renderer.addClass(newMessage_content, 'chat-message-user-content');
       const newMessage_text = this.renderer.createText(message);
@@ -87,14 +96,19 @@ export class AppComponent {
   }
 
   sendToAI(message: string) {
-    this.http.post<{ answer: string }>('http://127.0.0.1:8000/ask', { question: message })
+    this.http
+      .post<{ answer: string }>('http://127.0.0.1:8000/ask', {
+        question: message,
+      })
       .pipe(
-        catchError(error => {
+        catchError((error) => {
           console.error('Error:', error);
-          return of({ answer: 'Sorry, there was an error processing your request.' });
+          return of({
+            answer: 'Sorry, there was an error processing your request.',
+          });
         })
       )
-      .subscribe(response => {
+      .subscribe((response) => {
         this.aiMessage(response.answer);
       });
   }
