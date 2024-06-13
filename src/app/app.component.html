@@ -5,17 +5,14 @@
 
 <main class="main" id="main">
   <div class="content">
-    <!-- <img
-      id="img-saclay"
-      src="assets/images/saclay.png"
-      alt="Logo Universite Evry Paris-Saclay"
-    /> -->
     <iframe src="https://www.univ-evry.fr/accueil.html"></iframe>
 
+    <!-- CHATBOT BUTTON -->
     <div id="bot-button" (click)="toggleChat()">
       <img src="assets/images/white_bot.png" width="40px" />
     </div>
 
+    <!-- SETTINGS -->
     <div *ngIf="showSettings" id="settings-background">
       <div id="settings-container">
         <div id="settings-header">
@@ -111,6 +108,7 @@
       </div>
     </div>
 
+    <!-- CHAT -->
     <div id="chat-container">
       <div id="chat-header">
         <div id="chat-header-text"><h1>Sacl-AI Discussion</h1></div>
@@ -152,8 +150,8 @@
               </div>
             </div>
             <p class="chat-message-ai-content">
-              Bonjour, je suis l'assistant virtuel de l'université de Evry Paris
-              Saclay. Comment puis-je vous aider ?
+              Bonjour, je suis l'assistant virtuel de l'université d'Evry
+              Paris-Saclay. Comment puis-je vous aider ?
             </p>
           </div>
           <div *ngIf="isHuman" id="chat-recommandation-container">
@@ -214,15 +212,10 @@
         </div>
       </div>
     </div>
-
-    <div class="privacy-policy-container">
-      <a href="https://www.univ-evry.fr/politique-de-confidentialite.html"
-        >Politique de confidentialité</a
-      >
-    </div>
   </div>
 </main>
 
+<!-- BLUE LIGHT FILTER -->
 <div *ngIf="isBlueFilter" class="blue-filter"></div>
 
 <router-outlet />
