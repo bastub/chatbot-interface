@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { NgIf } from '@angular/common';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
-
+import { VoiceRecognitionService } from './voice-recognition.service'; // Import du service de reconnaissance vocale
 
 @Component({
   selector: 'app-root',
@@ -22,15 +22,47 @@ export class AppComponent {
   showSettings = false;
   isBlueFilter = false;
   isFeedback = false;
+  transcript = ''; // Variable pour stocker le texte capturé
+  isListening: any;
+  recognitionTimeout!: NodeJS.Timeout;
+
+  constructor(
+    private renderer: Renderer2,
+    private el: ElementRef,
+    private http: HttpClient,
+    private voiceService: VoiceRecognitionService // Injecter le service de reconnaissance vocale
+  ) {}
 
 
-  constructor(private renderer: Renderer2, private el: ElementRef, private http: HttpClient) {} 
+  onMicrophoneClick(): void {
+    if (this.isListening) {
+      this.stopVoiceRecognition();
+    } else {
+      this.startVoiceRecognition();
+      // Définir un délai pour l'arrêt automatique de la reconnaissance vocale
+      this.recognitionTimeout = setTimeout(() => {
+        this.stopVoiceRecognition();
+      }, 5000); // 5000 ms = 5 secondes
+    }
+  }
 
+  // Méthode pour démarrer la reconnaissance vocale
+  startVoiceRecognition(): void {
+    console.log('Starting voice recognition...');
+    this.isListening = true;
+    this.voiceService.startListening();
+  }
+
+  stopVoiceRecognition(): void {
+    console.log('Stopping voice recognition...');
+    this.isListening = false;
+    this.voiceService.stopListening();
+    this.transcript = this.voiceService.getTranscript(); // Capturer le texte transcrit
+    this.sendMessage(this.transcript); // Envoyer le texte capturé à la méthode sendMessage
+  }
+  
   toggleChat() {
     const chat = document.getElementById('chat-container');
-
-    // count the number of classes in the element chat
-
     if (chat) {
       const nb = chat.classList.length;
       chat.classList.toggle('chat-open');
@@ -54,17 +86,11 @@ export class AppComponent {
     this.isHuman = true;
   }
 
-
   sendMessageInput() {
-    const message = document.getElementById(
-      'chat-input-box'
-    ) as HTMLInputElement;
-    const chat = document.getElementById('chat-messages');
-
+    const message = document.getElementById('chat-input-box') as HTMLInputElement;
     if (message.value === '') {
       return;
     }
-
     this.sendMessage(message.value);
     message.value = '';
   }
@@ -82,8 +108,7 @@ export class AppComponent {
       this.renderer.appendChild(chat, newMessage_container);
       chat.scrollTop = chat.scrollHeight;
     }
-
-    this.sendToAI(message); // Envoyer le message à l'IA
+    this.sendToAI(message);
   }
 
   sendToAI(message: string) {

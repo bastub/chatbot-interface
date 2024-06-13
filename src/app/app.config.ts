@@ -9,6 +9,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
 
 import { environment } from '../env';
+import { VoiceRecognitionService } from './voice-recognition.service'; // Importez le service de reconnaissance vocale
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,5 +23,6 @@ export const appConfig: ApplicationConfig = {
         siteKey: environment.siteKeyV2,
       } as RecaptchaSettings,
     },
+    VoiceRecognitionService, // Ajoutez le service de reconnaissance vocale aux fournisseurs
   ],
 };

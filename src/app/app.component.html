@@ -148,25 +148,25 @@
             <ul id="chat-recommandation-list">
               <li
                 id="chat-recommandation"
-                (click)="sendMessage('Combien coûte l\'inscription ?')"
+                (click)="sendMessage('Quels sont vos horaires d\'ouverture?')"
               >
-                Combien coûte l'inscription à l'université ?
+              Quels sont vos horaires d'ouverture ? 
               </li>
               <li
                 id="chat-recommandation"
-                (click)="sendMessage('Quelles sont les formations proposées ?')"
+                (click)="sendMessage('Combien de formations y a-t-il à l\'université ?')"
               >
-                Quelles sont les formations proposées ?
+                Combien de formations y a-t-il à l'université ?
               </li>
               <li
                 id="chat-recommandation"
                 (click)="
                   sendMessage(
-                    'Quelles sont les coordonnées du centre médical ?'
+                    'Combien de bâtiments y a-t-il à l\'université ?'
                   )
                 "
               >
-                Quelles sont les coordonnées du centre médical ?
+                Combien de bâtiments y a-t-il à l'université ?
               </li>
             </ul>
           </div>
@@ -186,6 +186,14 @@
             (keyup.enter)="sendMessageInput()"
             autocomplete="off"
           />
+
+          <div *ngIf="isHuman" id="voice-button" (click)="onMicrophoneClick()">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="send"
+              fontIcon="microphone"
+            ></mat-icon>
+          </div>
 
           <div *ngIf="isHuman" id="send-button" (click)="sendMessageInput()">
             <mat-icon

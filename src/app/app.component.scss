@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+
 :host {
   --primary-color: hsl(204, 100%, 29%);
   --primary-color-dark: hsl(204, 100%, 20%);
@@ -624,6 +626,24 @@ h3 {
 }
 
 #send-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  border-radius: 9999px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  color: var(--secondary-color);
+
+  &:hover {
+    background: #f0f0f0;
+  }
+}
+
+#voice-button { 
   display: flex;
   justify-content: center;
   align-items: center;
