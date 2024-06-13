@@ -78,6 +78,21 @@
               </mat-slide-toggle>
             </div>
           </div>
+          <div class="settings-element-container" id="settings-modelv2">
+            <h3>Modèle expérimental</h3>
+            <div class="settings-buttons-container" id="settings-buttons">
+              <mat-slide-toggle
+                [checked]="isModelV2"
+                (change)="toggleModelV2()"
+                color="primary"
+              >
+                <span class="mat-slide-toggle-content">
+                  <span class="mat-slide-toggle-thumb"></span>
+                  <span class="mat-slide-toggle-bar"></span>
+                </span>
+              </mat-slide-toggle>
+            </div>
+          </div>
           <div class="settings-element-container" id="settings-privacy">
             <h3>
               <a href="https://www.univ-evry.fr/mentions-legales.html"
@@ -137,7 +152,7 @@
               </div>
             </div>
             <p class="chat-message-ai-content">
-              Bonjour, je suis l'assistant virtuel de l'université de Paris
+              Bonjour, je suis l'assistant virtuel de l'université de Evry Paris
               Saclay. Comment puis-je vous aider ?
             </p>
           </div>
@@ -148,25 +163,27 @@
             <ul id="chat-recommandation-list">
               <li
                 id="chat-recommandation"
-                (click)="sendMessage('Combien coûte l\'inscription ?')"
+                (click)="sendMessage('Quels sont vos horaires d\'ouverture ?')"
               >
-                Combien coûte l'inscription à l'université ?
+                Quels sont vos horaires d'ouverture ?
               </li>
               <li
                 id="chat-recommandation"
-                (click)="sendMessage('Quelles sont les formations proposées ?')"
+                (click)="
+                  sendMessage('Combien de bâtiments y a-t-il à l\'université ?')
+                "
               >
-                Quelles sont les formations proposées ?
+                Combien de bâtiments y a-t-il à l'université ?
               </li>
               <li
                 id="chat-recommandation"
                 (click)="
                   sendMessage(
-                    'Quelles sont les coordonnées du centre médical ?'
+                    'Combien de formations y a-t-il à l\'université ?'
                   )
                 "
               >
-                Quelles sont les coordonnées du centre médical ?
+                Combien de formations y a-t-il à l'université ?
               </li>
             </ul>
           </div>

@@ -28,6 +28,7 @@ export class AppComponent {
   showSettings = false;
   isBlueFilter = false;
   isFeedback = false;
+  isModelV2 = false;
 
   constructor(
     private renderer: Renderer2,
@@ -227,6 +228,10 @@ export class AppComponent {
         thumbs[i].classList.remove('visible');
       }
     }
+  }
+
+  toggleModelV2() {
+    this.isModelV2 = !this.isModelV2;
   }
 
   thumbUp(target: any) {
